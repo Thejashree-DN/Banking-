@@ -1,0 +1,40 @@
+import sys
+
+class Customer:
+    """Customer class with bank operations."""
+    bank_name = 'State Bank of India'
+    
+    def __init__(self, name, balance=0.0):
+        self.name = name
+        self.balance = balance
+    
+    def deposit(self, amt):
+        self.balance += amt
+        print(f'Balance after deposit: {self.balance}')
+    
+    def withdraw(self, amt):
+        if amt > self.balance:
+            print('Insufficient Funds.. cannot perform this operation')
+            return  # Using return instead of sys.exit() to keep the program running
+        self.balance -= amt
+        print(f'Balance after withdraw: {self.balance}')
+
+# Program Execution
+print(f'Welcome to {Customer.bank_name}')
+name = input('Enter Your Name: ')
+c = Customer(name)
+
+while True:
+    print('\nd-Deposit \nw-Withdraw \ne-Exit')
+    option = input('Choose your option: ').lower()  # Simplified case handling
+    if option == 'd':
+        amt = float(input('Enter amount: '))
+        c.deposit(amt)
+    elif option == 'w':
+        amt = float(input('Enter amount: '))
+        c.withdraw(amt)
+    elif option == 'e':
+        print('Thanks for Banking')
+        sys.exit()
+    else:
+        print('Invalid option.. Please choose a valid option')
